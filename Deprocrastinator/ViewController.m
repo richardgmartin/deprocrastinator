@@ -8,7 +8,8 @@
 
 #import "ViewController.h"
 
-@interface ViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface ViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *textField;
 
 
 
@@ -22,13 +23,16 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 4;
+    return 0;
     
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     return nil;
+}
+- (IBAction)onAddPressed:(UIButton *)sender {
+
 }
 
 @end
