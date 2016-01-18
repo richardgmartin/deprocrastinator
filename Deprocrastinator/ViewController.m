@@ -8,8 +8,9 @@
 
 #import "ViewController.h"
 
-@interface ViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface ViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UITextField *taskToAdd;
 
 
 @end
@@ -25,7 +26,7 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 4;
+    return 0;
     
 }
 
@@ -33,5 +34,13 @@
     
     return nil;
 }
+
+- (IBAction)onAddButtonPressed:(UIButton *)sender {
+    
+    
+    
+}
+
+
 
 @end
