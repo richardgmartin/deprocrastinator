@@ -38,6 +38,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="hm1-hk-flU" appends="YES" id="EP1-cy-ntY"/>
+                                            <outletCollection property="gestureRecognizers" destination="hm1-hk-flU" appends="YES" id="QAq-WG-6bn"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -91,6 +96,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="hm1-hk-flU">
+                    <connections>
+                        <action selector="onCellTapped:" destination="BYZ-38-t0r" id="BHO-c9-i7e"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1044" y="838"/>
         </scene>

@@ -22,6 +22,9 @@
     [super viewDidLoad];
     self.cells = [NSMutableArray new];
 }
+- (IBAction)onCellTapped:(UITapGestureRecognizer *)sender {
+    
+}
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -37,7 +40,8 @@
 - (IBAction)onAddPressed:(UIButton *)sender {
     [self.cells addObject:self.textField.text];
     [self.taskTableView reloadData];
-    
+    [self.textField resignFirstResponder];
+    self.textField.text = @"";
 }
 
 @end
