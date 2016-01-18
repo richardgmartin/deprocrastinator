@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *taskTableView;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGestureRecognizer;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
+@property int i;
 
 
 @end
@@ -23,9 +24,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.cells = [NSMutableArray new];
+    self.i = 0;
 }
 
-
+- (IBAction)onEditTapped:(UIBarButtonItem *)sender {
+    if (self.i%2 == 0) {
+        sender.title = @"Edit";
+    } else {
+        sender.title = @"Done";
+    }
+    self.i++;
+    
+    
+}
+//touch once makes text green
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView cellForRowAtIndexPath:indexPath].textLabel.textColor = [UIColor greenColor];
 }
