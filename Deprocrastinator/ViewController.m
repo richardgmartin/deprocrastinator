@@ -27,6 +27,15 @@
     
 }
 
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
+    
+    cell.textLabel.text = [self.tasksArray objectAtIndex:indexPath.row];
+    
+    return cell;
+}
+
 - (IBAction)onSwipeGesture:(UISwipeGestureRecognizer *)sender {
     
     if (sender.state == UIGestureRecognizerStateEnded) {
@@ -47,6 +56,19 @@
     }
 }
 
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    
+    [tableView exchangeSubviewAtIndex:sourceIndexPath.row withSubviewAtIndex:destinationIndexPath.row];
+    
+    NSString *rowItem = [self.tasksArray objectAtIndex:sourceIndexPath.row];
+    
+    [self.tasksArray removeObject:rowItem];
+    [self.tasksArray insertObject:rowItem atIndex:destinationIndexPath.row];
+    
+    NSLog(@"tasksArray is %@", self.tasksArray);
+}
+
+
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -54,14 +76,7 @@
     
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
-    
-    cell.textLabel.text = [self.tasksArray objectAtIndex:indexPath.row];
-    
-    return cell;
-}
+
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -73,8 +88,21 @@
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [self.tasksArray removeObject:self.tasksArray[indexPath.row]];
-    [self.addTableView reloadData];
+    
+    UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:@"Delete Alert" message:@"Are you sure?" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *cancelAlert = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil];
+    
+    UIAlertAction *confirmDelete = [UIAlertAction actionWithTitle:@"Delete " style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                                    [self.tasksArray removeObject:self.tasksArray[indexPath.row]];
+                                    [self.addTableView reloadData];
+    }];
+    
+    [deleteAlert addAction:cancelAlert];
+    [deleteAlert addAction:confirmDelete];
+    
+    [self presentViewController:deleteAlert animated:true completion:nil];
+    
     
 }
 
@@ -98,13 +126,19 @@
 
 - (IBAction)onEditButtonPressed:(UIBarButtonItem *)sender {
     
-    if (self.editing == NO) {
-        [self.addTableView setEditing:YES];
-        [sender setTitle:@"Done"];
-    } else {
+    if (self.editing) {
+        self.editing = false;
+        [self.addTableView setEditing:false animated:false];
+        sender.style = UIBarButtonItemStylePlain;
         [sender setTitle:@"Edit"];
-        [self.addTableView setEditing:NO];
+    } else {
+        self.editing = true;
+        [self.addTableView setEditing:true animated:true];
+        sender.style = UIBarButtonItemStyleDone;
+        [sender setTitle:@"Done"];
     }
+
+
 }
 
 
