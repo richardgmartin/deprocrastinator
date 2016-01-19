@@ -29,6 +29,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -60,6 +61,7 @@
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="znh-au-Ozg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="5hm-L4-GJ2"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="znh-au-Ozg" secondAttribute="bottom" id="Ift-Wm-Lmy"/>
@@ -90,9 +92,16 @@
                                 <include reference="Ift-Wm-Lmy"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Rq4-Eb-3Ip" appends="YES" id="bf7-L9-fTv"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Deprocrastinator" id="GiB-mg-qBx">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="bIP-An-3ge"/>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="bIP-An-3ge">
+                            <connections>
+                                <action selector="onEditButtonPressed:" destination="BYZ-38-t0r" id="ASD-sv-eiT"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addTableView" destination="znh-au-Ozg" id="Jud-xZ-OpY"/>
@@ -100,6 +109,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="Rq4-Eb-3Ip">
+                    <connections>
+                        <action selector="onSwipeGesture:" destination="BYZ-38-t0r" id="VPh-Z3-djN"/>
+                        <outlet property="delegate" destination="znh-au-Ozg" id="NB4-6A-CRX"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1044" y="838"/>
         </scene>
